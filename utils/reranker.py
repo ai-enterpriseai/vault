@@ -44,7 +44,5 @@ class CohereReranker:
                 if chunk.index < len(chunks)
             ]
         except Exception as e:
-            self.logger.error(
-                "An unexpected error occurred: %s", str(e)
-            )
+            logging.error("An unexpected error occurred: %s", str(e))
             return []
