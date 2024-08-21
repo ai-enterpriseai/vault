@@ -12,15 +12,19 @@ VAULT_APP is a Streamlit application that allows users to explore and interact w
 
 ## Installation
 
-1. Clone the repository:
+1. Create a virtual environment:
 
-git clone https://github.com/ai-enterpriseai/vault.git
+`python -m venv vault`
 
-2. Install the required dependencies:
+2. Clone the repository:
 
-pip install -r requirements.txt
+`git clone https://github.com/ai-enterpriseai/vault.git`
 
-3. Set up the required API keys and configurations in the `.streamlit/secrets-example.toml` file, and rename it to `secrets.toml`
+3. Install the required dependencies:
+
+`pip install -r requirements.txt`
+
+4. Set up the required API keys and configurations in the `.streamlit/secrets-example.toml` file, and rename it to `secrets.toml`
 
 ## Usage
 
