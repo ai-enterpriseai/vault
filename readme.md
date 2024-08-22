@@ -14,11 +14,13 @@ VAULT_APP is a Streamlit application that allows users to explore and interact w
 
 1. Create a virtual environment:
 
-`python -m venv vault`
+`python -m venv vault-env`
 
 2. Clone the repository:
 
 `git clone https://github.com/ai-enterpriseai/vault.git`
+`vault-env\Scripts\activate.bat`
+`cd vault`
 
 3. Install the required dependencies:
 
@@ -29,6 +31,8 @@ VAULT_APP is a Streamlit application that allows users to explore and interact w
 ## Usage
 
 1. Run the Streamlit application:
+
+`streamlit run app.py`
 
 2. Navigate through the different sections of the application using the sidebar:
    - **Vault**: Interact with VAULT.AI by asking questions and receiving contextual responses.
