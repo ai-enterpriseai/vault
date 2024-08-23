@@ -30,7 +30,7 @@ class CohereReranker:
                 documents=chunks,
                 top_n=top_n,
                 model="rerank-multilingual-v3.0"
-            )
+            ) 
 
             top_chunks = sorted(
                 results.results,

@@ -83,7 +83,7 @@ class VaultAI:
                         model="gpt-4o-2024-05-13", # local models can be served with vLLM with the same syntax 
                         messages=[{"role": m["role"], "content": m["content"]} for m in self.messages],
                         stream=True,
-                    )
+                    ) 
 
                     # Process each chunk as it arrives
                     for chunk in stream:
