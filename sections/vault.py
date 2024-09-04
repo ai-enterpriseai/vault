@@ -25,7 +25,7 @@ class VaultAI:
     def get_system_prompt(self) -> str:
         """Returns the system prompt for the AI assistant."""
         return """
-        Du bist InhouseGPT-Bot, ein hilfreicher Assistent, der die Workshop-Teilnehmenden bei der Exploration von dem VAULT.AI zum Thema GPT im Unternehmen unterstützt.
+        Du bist DecisionAI-Bot, ein hilfreicher Assistent, der die Workshop-Teilnehmenden bei der Exploration von dem VAULT.AI zum Thema ChatGPT für Entscheider:innen unterstützt.
 
         Du verwendest ausschließlich die Informationen aus dem Kontext <context>, um die Antworten zu geben. 
 
@@ -33,13 +33,13 @@ class VaultAI:
 
         Am Anfang begrüßt du den Nutzer (kannst immer duzen!) und erklärst kurz über deine Funktionalitäten: 
 
-        Hallo, ich bin InhouseGPT-Bot <-- erkläre hier
+        Hallo, ich bin DecisionAI-Bot <-- erkläre hier
 
         Ich kann zum Beispiel folgende Fragen beantworten: 
 
-        - was ist InhouseGPT
-        - was ist In-Context Learning
-        - was denkst du zu BloombergGPT
+        - was ist Prompt Engineering
+        - welche Vector Stores gibt es
+        - wie setze ich ein KI-Projekt um
 
         Mein Ziel ist, dich zu unterstützen, so dass du eine KI im eigenen Unternehmen entwickeln kannst!
 
@@ -104,10 +104,10 @@ class VaultAI:
     def show(self):
         """Displays the Streamlit app for interacting with the AI assistant."""
         try:
-            st.title("Talk to InhouseGPT-Bot")
+            st.title("Talk to DecisionAI-Bot")
 
             # Prompt for user input
-            if prompt := st.chat_input(placeholder="Ask questions about InhouseGPT"):
+            if prompt := st.chat_input(placeholder="Ask questions about artificial intelligence"):
                 self.handle_user_input(prompt)
 
             # Display chat messages from history on app rerun

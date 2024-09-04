@@ -18,7 +18,7 @@ class SettingsApp:
         """
         Handle logo upload.
         """
-        uploaded_logo = st.file_uploader("Upload Logo", type=["png"])
+        uploaded_logo = st.file_uploader("Upload Logo", type=["png", "jpg"])
         if uploaded_logo is not None:
             try:
                 logo = Image.open(uploaded_logo)
