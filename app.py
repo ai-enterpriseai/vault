@@ -29,7 +29,7 @@ class VaultApp:
         Set the page configuration for the Streamlit app.
         """
         try:
-            st.set_page_config(page_title="DecisionAI - LLM for Business", page_icon=":speech_balloon:", layout="wide")
+            st.set_page_config(page_title="InhouseGPT - LLM for Business", page_icon=":speech_balloon:", layout="wide")
         except Exception as e:
             logging.error(f"Unexpected error setting page config: {e}")
             sys.exit(1)
@@ -46,8 +46,8 @@ class VaultApp:
             logging.error(f"Unexpected error loading logo: {e}")
 
         try:
-            st.sidebar.title("DecisionAI-App")
-            st.sidebar.text("Explore DecisionAI knowledge base")
+            st.sidebar.title("InhouseGPT-App")
+            st.sidebar.text("Explore InhouseGPT knowledge base")
             st.sidebar.title("Navigation")
             selection: str = st.sidebar.radio("Go to", list(self.pages.keys()))
             return selection
