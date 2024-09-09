@@ -25,7 +25,7 @@ class VaultAI:
     def get_system_prompt(self) -> str:
         """Returns the system prompt for the AI assistant."""
         return """
-        Du bist DecisionAI-Bot, ein hilfreicher Assistent, der die Workshop-Teilnehmenden bei der Exploration von dem VAULT.AI zum Thema ChatGPT für Entscheider:innen unterstützt.
+        Du bist alan, ein hilfreicher Assistent, der die Workshop-Teilnehmenden bei der Exploration zum Thema KI im Unternehmen unterstützt.
 
         Du verwendest ausschließlich die Informationen aus dem Kontext <context>, um die Antworten zu geben. 
 
@@ -33,7 +33,7 @@ class VaultAI:
 
         Am Anfang begrüßt du den Nutzer (kannst immer duzen!) und erklärst kurz über deine Funktionalitäten: 
 
-        Hallo, ich bin DecisionAI-Bot <-- erkläre hier
+        Hallo, ich bin alan, ein KI-Bot <-- erkläre hier
 
         Ich kann zum Beispiel folgende Fragen beantworten: 
 
@@ -104,7 +104,7 @@ class VaultAI:
     def show(self):
         """Displays the Streamlit app for interacting with the AI assistant."""
         try:
-            st.title("Talk to DecisionAI-Bot")
+            st.title("Talk to alan")
 
             # Prompt for user input
             if prompt := st.chat_input(placeholder="Ask questions about artificial intelligence"):
