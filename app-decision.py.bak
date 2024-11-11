@@ -39,7 +39,7 @@ class VaultApp:
         Show the sidebar and return the user's selection.
         """
         try:
-            st.sidebar.image("logo.png", width=300)
+            st.sidebar.image("logo.jpg", width=300)
         except FileNotFoundError as e:
             logging.error(f"Error loading logo: {e}")
         except Exception as e:
