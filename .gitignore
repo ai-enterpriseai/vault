@@ -4,3 +4,4 @@ bm25_params.json
 __pycache__
 *.pyc
 *.pyo
+*.py.bak
