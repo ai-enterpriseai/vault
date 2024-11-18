@@ -1,7 +1,6 @@
 streamlit==1.27.2
 git+https://github.com/ai-enterpriseai/pipeline.git
 langchain==0.2.3
-langchain-openai==0.1.9
 langchain_community==0.2.4
 langchain_unstructured==0.1.1
 openai==1.39.0
