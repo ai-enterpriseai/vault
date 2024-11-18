@@ -12,7 +12,7 @@ class VaultApp:
     """
     def __init__(self):
         self.pages: Dict[str, Callable] = {
-            "Bot": vault.VaultAI,
+            "Bot": vault.Vault,
             "Data": data.DataLoader,
             "Settings": settings.SettingsApp,
         }
