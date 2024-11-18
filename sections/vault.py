@@ -2,13 +2,12 @@ import streamlit as st
 
 from pipeline.prompts.manager import PromptManager
 from pipeline.utils.model import LLMClient
-from pipeline.utils.configs import (
-    PipelineConfig
-)
+from pipeline.utils.configs import PipelineConfig
 from pipeline.utils.types import ChatMessage
 from pipeline.utils.logging import setup_logger
 
 from utils.retriever import ContextRetriever
+from utils.configs import replace_api_keys
 
 logger = setup_logger(__name__)
 
@@ -17,7 +16,8 @@ class Vault:
     
     def __init__(self, config: PipelineConfig) -> None:
         """Initialize VaultAI with configuration."""
-        self.config = config
+        self.config = replace_api_keys(config)
+        # logger.info(config.)
         self.retriever = ContextRetriever(self.config)
         self.prompt_manager = PromptManager(self.config.manager)
         self.llm = LLMClient(self.config.generator)

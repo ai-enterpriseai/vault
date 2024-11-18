@@ -5,6 +5,7 @@ from pipeline.utils.configs import PipelineConfig
 from pipeline.utils.logging import setup_logger
 
 from utils.loader import DocumentsLoader
+from utils.configs import replace_api_keys
 
 logger = setup_logger(__name__)
 
@@ -12,7 +13,7 @@ class DataLoader:
     """Class for loading and indexing data from various sources."""
     
     def __init__(self, config: PipelineConfig):
-        self.config = config
+        self.config = replace_api_keys(config)
         self.docs_loader = DocumentsLoader(config)
         logger.info("DataLoader initialized")
         st.success("Successfully initialized loader")

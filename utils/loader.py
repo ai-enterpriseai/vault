@@ -9,6 +9,8 @@ from pipeline.utils.configs import PipelineConfig
 from pipeline.utils.types import ProcessedDocument
 from pipeline.utils.logging import setup_logger
 
+from utils.configs import replace_api_keys
+
 logger = setup_logger(__name__)
 
 class DocumentsLoader:
@@ -28,7 +30,7 @@ class DocumentsLoader:
         Raises:
             ValueError: If configuration is invalid
         """
-        self.config = config
+        self.config = replace_api_keys(config)
         self.processor = Processor(self.config.processor)
         self.dense_embedder = DenseEmbedder(self.config.embedder)
         self.sparse_embedder = SparseEmbedder(self.config.embedder)
