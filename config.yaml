@@ -31,7 +31,7 @@ base_eval:
     indexer: # qdrant client 
       use_local_db: false
       url: "YOUR_URL"
-      qdrant_api_key: "YOUR_API_KEY"
+      qdrant_api_key: "YOUR_API_KEY" 
       collection_name: "YOUR_COLLECTION_NAME"
       db_path: "database"
       dense_dim: 384 # must correspond with embedder 
@@ -47,19 +47,18 @@ base_eval:
       description: "German language workshop assistant for AI implementation guidance"
 
     generator:
-      primary_model: 
+      primary_model: # TODO this can be removed once pipeline is reinstalled, see configs.py/ModelConfig
         name: "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo"
         max_tokens: 4096
         temperature: 0.2
         timeout: 30.0
       fallback_model: 
-        name: "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo"
+        name: "claude-3-5-sonnet-20241022"
         max_tokens: 4096
         temperature: 0.2
         timeout: 30.0
-      together_api_key: "YOUR_API_KEY"
-      anthropic_api_key: "YOUR_API_KEY"
-      temperature: 0.7
+      together_api_key: "YOUR_API_KEY" 
+      anthropic_api_key: "YOUR_API_KEY" 
     
   disclaimer: |
     Evaluation relies on expert-reviewed ground truth data.

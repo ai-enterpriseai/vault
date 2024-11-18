@@ -1,7 +1,7 @@
 .streamlit/secrets.toml
 .streamlit/secrets.toml.bak
-config.yaml
 bm25_params.json
+config-local.yaml
 db
 database
 __pycache__

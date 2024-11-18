@@ -60,15 +60,18 @@ def replace_api_keys(config: dict) -> dict:
     Returns:
         dict: The updated configuration dictionary with API keys replaced.
     """
-    # Check if indexer.qdrant_api_key is empty or default
     if not config.generator.together_api_key or config.indexer.qdrant_api_key == 'YOUR_API_KEY':
         config.indexer.qdrant_api_key = st.secrets['QDRANT_API_KEY']
+    
+    if not config.indexer.url or config.indexer.url == 'YOUR_URL':
+        config.indexer.url = st.secrets['QDRANT_URL']
 
-    # Check if generator.together_api_key is empty or default
+    if not config.indexer.collection_name or config.indexer.collection_name == 'YOUR_COLLECTION_NAME':
+        config.indexer.collection_name = st.secrets['QDRANT_COLLECTION_NAME']
+
     if not config.generator.together_api_key or config.generator.together_api_key == 'YOUR_API_KEY':
         config.generator.together_api_key = st.secrets['TOGETHER_API_KEY']
 
-    # Check if generator.anthropic_api_key is empty or default
     if not config.generator.anthropic_api_key or config.generator.anthropic_api_key == 'YOUR_API_KEY':
         config.generator.anthropic_api_key = st.secrets['ANTHROPIC_API_KEY']
 
