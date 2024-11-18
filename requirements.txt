@@ -12,3 +12,6 @@ cohere==5.5.6
 unstructured==0.10.18
 unstructured[md]==0.10.18
 nltk==3.8.1
+qdrant_client
+sentence-transformers
+rank_bm25
