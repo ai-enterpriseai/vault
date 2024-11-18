@@ -31,7 +31,7 @@ base_eval:
     indexer: # qdrant client 
       use_local_db: false
       url: "https://c73ec2ca-fdf3-445c-92ea-febe55cebf46.us-east4-0.gcp.cloud.qdrant.io"
-      qdrant_api_key: "YOUR_KEY"
+      qdrant_api_key: "YOUR_API_KEY"
       collection_name: "inhousegpt-participantXX"
       # db_path: "database"
       dense_dim: 384 # must correspond with embedder 
@@ -57,8 +57,8 @@ base_eval:
         max_tokens: 4096
         temperature: 0.2
         timeout: 30.0
-      together_api_key: "YOUR_KEY"
-      anthropic_api_key: "YOUR_KEY"
+      together_api_key: "YOUR_API_KEY"
+      anthropic_api_key: "YOUR_API_KEY"
       temperature: 0.7
     
   disclaimer: |

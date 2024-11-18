@@ -1,7 +1,10 @@
+import yaml
+
+import streamlit as st
+
 from pathlib import Path
 from typing import Optional, Literal, Union
-from pydantic import BaseModel, Field, field_validator, ConfigDict
-import yaml
+from pydantic import BaseModel, Field, field_validator
 
 from pipeline.utils.logging import setup_logger
 
@@ -46,6 +49,30 @@ def load_config(config_path: Union[str, Path] = None) -> dict:
     except Exception as e:
         logger.error(f"Error loading config: {e}")
         raise 
+
+def replace_api_keys(config: dict) -> dict:
+    """
+    Replace API keys in the configuration with Streamlit secrets.
+
+    Args:
+        config (dict): The configuration dictionary.
+
+    Returns:
+        dict: The updated configuration dictionary with API keys replaced.
+    """
+    # Check if indexer.qdrant_api_key is empty or default
+    if not config.generator.together_api_key or config.indexer.qdrant_api_key == 'YOUR_API_KEY':
+        config.indexer.qdrant_api_key = st.secrets['QDRANT_API_KEY']
+
+    # Check if generator.together_api_key is empty or default
+    if not config.generator.together_api_key or config.generator.together_api_key == 'YOUR_API_KEY':
+        config.generator.together_api_key = st.secrets['TOGETHER_API_KEY']
+
+    # Check if generator.anthropic_api_key is empty or default
+    if not config.generator.anthropic_api_key or config.generator.anthropic_api_key == 'YOUR_API_KEY':
+        config.generator.anthropic_api_key = st.secrets['ANTHROPIC_API_KEY']
+
+    return config
 
 class UIConfig(BaseModel):
     """Configuration for the Streamlit UI."""
