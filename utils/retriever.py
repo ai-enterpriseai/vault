@@ -1,12 +1,9 @@
-import logging
-from typing import Optional
-
 from pipeline.embedder import DenseEmbedder, SparseEmbedder
 from pipeline.indexer import Indexer
 from pipeline.retriever import Retriever
 
 from pipeline.utils.model import QueryDecomposition 
-from pipeline.utils.configs import IndexerConfig, EmbedderConfig, RetrieverConfig, PipelineConfig 
+from pipeline.utils.configs import PipelineConfig 
 from pipeline.utils.logging import setup_logger
 
 logger = setup_logger(__name__)

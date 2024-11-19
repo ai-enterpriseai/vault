@@ -39,8 +39,8 @@ VAULT_APP is a Streamlit application that allows users to explore and interact w
    - **Data**: Load and index data from various sources.
    - **Settings**: Configure API keys and upload a custom logo.
 
-3. Explore the features and functionalities of VAULT.AI by following the on-screen instructions.
+3. Explore the features and functionalities of VAULT.AI by following the on-screen instructions. 
 
 ## Warning 
 
-Some functionality won't run as this repo is a part of a larger package. Here it is used to serve a [demo Streamlit app](https://vaultai.streamlit.app/).
+Some functionality won't run as this repo is a part of a larger package. Here it is used to serve a [demo Streamlit app](https://inhousegpt.streamlit.app/ ).
