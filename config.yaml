@@ -39,6 +39,7 @@ base_eval:
     retriever:
       top_k: 25
       rerank_top_k: 5
+      # reranker_model: 5 # TODO reranker name 
       
     manager: 
       templates_dir: "./prompts"
@@ -47,7 +48,7 @@ base_eval:
       description: "German language workshop assistant for AI implementation guidance"
 
     generator:
-      primary_model: # TODO this can be removed once pipeline is reinstalled, see configs.py/ModelConfig
+      primary_model: 
         name: "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo"
         max_tokens: 4096
         temperature: 0.2

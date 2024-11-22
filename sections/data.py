@@ -76,11 +76,3 @@ class DataLoader:
         except Exception as e:
             logger.error(f"Error showing data loader: {e}")
             st.error("An error occurred. Please check the logs.")
-
-# if __name__ == "__main__":
-#     import asyncio
-#     from utils.configs import load_config
-    
-#     config = load_config()
-#     data_loader = DataLoader(config)
-#     asyncio.run(data_loader.show())

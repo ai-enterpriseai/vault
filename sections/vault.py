@@ -17,7 +17,6 @@ class Vault:
     def __init__(self, config: PipelineConfig) -> None:
         """Initialize VaultAI with configuration."""
         self.config = replace_api_keys(config)
-        # logger.info(config.)
         self.retriever = ContextRetriever(self.config)
         self.prompt_manager = PromptManager(self.config.manager)
         self.llm = LLMClient(self.config.generator)
@@ -36,7 +35,7 @@ class Vault:
         try:
             context = await self.retriever.get_context(prompt)
             self.messages.append({"role": "user", "content": prompt})
-            self.messages.append({"role": "context", "content": context})
+            self.messages.append({"role": "user", "content": context})  # TODO role user or content 
             logger.info(f"Processed user input: {prompt[:100]}...")
         except Exception as e:
             logger.error(f"Error handling user input: {e}")

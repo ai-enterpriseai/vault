@@ -33,7 +33,7 @@ class ContextRetriever:
             config=self.config.retriever,
             vector_index=self.indexer,
             llm_client=QueryDecomposition(self.config.generator)
-        )
+        ) 
 
         logger.info("ContextRetriever initialized")
 
