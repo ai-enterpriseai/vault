@@ -37,7 +37,7 @@ class App:
         """Set the page configuration for the Streamlit app."""
         try:
             st.set_page_config(
-                page_title="processai - llm for business", 
+                page_title="decisionai - llm for business", 
                 page_icon="favicon.png", 
                 layout="wide"
             )
