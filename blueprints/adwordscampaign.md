@@ -32,7 +32,7 @@ run the # routine exactly
 
 - apply great detail 
 - write down the most important points 
-- store them in ``<memory>`` 
+- store them in ``<memory>`` (internal context of the language model)
 
 
 ---

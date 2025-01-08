@@ -9,3 +9,4 @@ __pycache__
 *.pyo
 *.py.bak
 .env
+.env__

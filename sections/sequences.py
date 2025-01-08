@@ -6,6 +6,8 @@ from sequencer.runner import SequenceRunner
 from pipeline.utils.configs import PipelineConfig
 from pipeline.utils.logging import setup_logger
 
+from utils.configs import replace_runner_settings
+
 logger = setup_logger(__name__)
 
 BLUEPRINT_DIR = Path(__file__).parent.parent / "blueprints"
@@ -17,11 +19,12 @@ class Sequences:
         """Initialize Sequences with configuration."""
         self.config = config
         self.models = [
-            "claude-3-5-sonnet-20241022",  # Anthropic
-            # "gpt-4o-2024-08-06",  # OpenAI
+            # "claude-3-5-sonnet-20241022",  # Anthropic
+            "gpt-4o-2024-08-06",  # OpenAI
         ]
         self.runner = SequenceRunner()
-        
+        replace_runner_settings(self.runner)
+        logger.info(self.runner.settings)
         if "messages" not in st.session_state:
             st.session_state.messages = []
             
@@ -151,7 +154,7 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
                 logger.info(f"Using sequence file: {sequence_file}")
                 
                 placeholders = {"description": st.session_state.user_input}
-                await run_sequence_and_display(
+                await self.run_sequence_and_display(
                     runner=self.runner,
                     sequence_file=sequence_file,
                     models=self.models,
