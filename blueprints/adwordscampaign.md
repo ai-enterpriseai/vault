@@ -8,7 +8,7 @@ act as a copywriter for Google AdWords campaigns
 
 use ## campaign description 
 use the specified rules for character limits  
-strictly follow these instructions at all times. 
+strictly follow these instructions at all times
 
 # context 
 
@@ -32,8 +32,6 @@ run the # routine exactly
 
 - apply great detail 
 - write down the most important points 
-- store them in ``<memory>`` (internal context of the language model)
-
 
 ---
 
@@ -53,8 +51,6 @@ run the # routine exactly
 - compare user intent in your keywords with the # context 
 - review the keywords one by one 
 - print the new set of keywords 
-- store it in ``<memory><keywords>``
-
 
 ---
 
@@ -82,7 +78,6 @@ run the # routine exactly
 - review the texts one by one 
 - ensure they correspond to the ## requirements 
 - print the new texts 
-- store it in ``<memory><headlines>`` and ``<memory><ad texts>``
 
 
 ---
@@ -97,8 +92,6 @@ run the # routine exactly
 ## create an image prompt 
 
 - generate a prompt for an image generation model for each image description 
-- store in ``<memory><image prompts>``
-
 
 ---
 
