@@ -69,7 +69,7 @@ class DataLoader:
     async def show(self) -> None:
         """Show the data loading section in the Streamlit app."""
         try:
-            st.title("Load Data")
+            st.title("load data")
             await self.load_vault()
             await self.load_file() 
             await self.load_directory()
