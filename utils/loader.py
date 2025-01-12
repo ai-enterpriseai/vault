@@ -78,6 +78,7 @@ class DocumentsLoader:
         """
         try:
             documents = await self.processor.load_documents(file_path)
+            logger.info(f"Loaded file: {file_path}")
             processed_documents = []
             async for doc in self.processor.process_documents(documents):
                 processed_documents.append(doc)

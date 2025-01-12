@@ -24,7 +24,7 @@ class Sequences:
         ]
         self.runner = SequenceRunner()
         replace_runner_settings(self.runner)
-        logger.info(self.runner.settings)
+
         if "messages" not in st.session_state:
             st.session_state.messages = []
             
@@ -90,9 +90,9 @@ class Sequences:
         try:
             st.header('Generate AdWord campaign texts')
             
-            def on_generate_clicked():
-                st.session_state.generate_clicked = True
-                st.session_state.user_input = user_input
+            def on_adwords_clicked():
+                st.session_state.adwords_clicked = True
+                st.session_state.adwords_input = user_input
 
             user_input = st.text_area(
                 label='Enter description here:',
@@ -102,25 +102,23 @@ You can write multiple paragraphs.
 Include product details, target audience, campaign goals, etc."""
             )
 
-            st.button('generate ad texts', on_click=on_generate_clicked)
+            st.button('generate ad texts', on_click=on_adwords_clicked)
 
-            if 'generate_clicked' in st.session_state and st.session_state.generate_clicked:
+            if 'adwords_clicked' in st.session_state and st.session_state.adwords_clicked:
                 logger.info("Generate clicked, using stored input")
                 st.header('Campaign description')
-                st.write(st.session_state.user_input)
+                st.write(st.session_state.adwords_input)
                 
                 sequence_file = BLUEPRINT_DIR / "adwordscampaign.md"
                 logger.info(f"Using sequence file: {sequence_file}")
                 
-                placeholders = {"description": st.session_state.user_input}
-
-                # Call the helper
+                placeholders = {"description": st.session_state.adwords_input}
                 await self.run_sequence_and_display(
                     runner=self.runner,
                     sequence_file=sequence_file,
                     models=self.models,
                     placeholders=placeholders,
-                    clear_session_flag="generate_clicked"
+                    clear_session_flag="adwords_clicked"
                 )
 
         except Exception as e:
@@ -153,7 +151,7 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
                 sequence_file = BLUEPRINT_DIR / "contentcalendar.md"
                 logger.info(f"Using sequence file: {sequence_file}")
                 
-                placeholders = {"description": st.session_state.user_input}
+                placeholders = {"description": st.session_state.calendar_input}
                 await self.run_sequence_and_display(
                     runner=self.runner,
                     sequence_file=sequence_file,
