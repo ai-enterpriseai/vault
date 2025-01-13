@@ -309,23 +309,23 @@ Specify functionality, inputs, outputs, and any special requirements."""
             st.title("run sequences")
 
             tab1, tab2, tab3, tab4, tab5 = st.tabs([
-                "AdWords", 
-                "Calendar", 
                 "Solver",
                 "Tester",
-                "Coder"
+                "Coder",
+                "AdWords",
+                "Calendar"
             ])
             
             with tab1:
-                await self.show_adwords_tab()  
-            with tab2:
-                await self.show_calendar_tab()
-            with tab3:
                 await self.show_solver_tab()
-            with tab4:
+            with tab2:
                 await self.show_tester_tab()
-            with tab5:
+            with tab3:
                 await self.show_generator_tab()
+            with tab4:
+                await self.show_adwords_tab()
+            with tab5:
+                await self.show_calendar_tab()
 
         except Exception as e:
             logger.error(f"Error in main interface: {e}")
