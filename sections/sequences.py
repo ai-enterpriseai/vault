@@ -106,8 +106,7 @@ Include product details, target audience, campaign goals, etc."""
 
             if 'adwords_clicked' in st.session_state and st.session_state.adwords_clicked:
                 logger.info("Generate clicked, using stored input")
-                st.header('Campaign description')
-                st.write(st.session_state.adwords_input)
+                st.header('Results')
                 
                 sequence_file = BLUEPRINT_DIR / "adwordscampaign.md"
                 logger.info(f"Using sequence file: {sequence_file}")
@@ -145,8 +144,7 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
 
             if 'calendar_clicked' in st.session_state and st.session_state.calendar_clicked:
                 logger.info("Calendar clicked, using stored input")
-                st.header('Content brief')
-                st.write(st.session_state.calendar_input)
+                st.header('Results')
                 
                 sequence_file = BLUEPRINT_DIR / "contentcalendar.md"
                 logger.info(f"Using sequence file: {sequence_file}")
@@ -165,16 +163,169 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
             logger.error(f"Error in Calendar tab: {e}")
             st.error("An error occurred in the Calendar tab")
 
+    async def show_solver_tab(self) -> None:
+        """Display problem solver tab interface."""
+        try:
+            st.header('Solve coding errors')
+            
+            def on_solver_clicked():
+                if not user_input.strip():
+                    st.error("Please enter a problem description")
+                    return
+                st.session_state.solver_clicked = True
+                st.session_state.solver_input = user_input
+
+            user_input = st.text_area(
+                label='Paste your code:',
+                height=70,
+                placeholder="""Paste your code, error message, problem description here."""
+            )
+
+            st.button('solve problem', on_click=on_solver_clicked)
+
+            if 'solver_clicked' in st.session_state and st.session_state.solver_clicked:
+                logger.info("Solver clicked, using stored input")
+                st.header('Results')
+                
+                sequence_file = BLUEPRINT_DIR / "solver.md"
+                logger.info(f"Using sequence file: {sequence_file}")
+                
+                placeholders = {"error": st.session_state.solver_input}
+                await self.run_sequence_and_display(
+                    runner=self.runner,
+                    sequence_file=sequence_file,
+                    models=self.models,
+                    placeholders=placeholders,
+                    spinner_text="Analyzing and solving...",
+                    clear_session_flag="solver_clicked"
+                )
+                st.success("Problem analysis completed successfully!")
+
+        except Exception as e:
+            logger.error(f"Error in Solver tab: {e}")
+            st.error("An error occurred in the Solver tab")
+
+    async def show_tester_tab(self) -> None:
+        """Display test case generator tab interface."""
+        try:
+            st.header('Generate tests')
+            
+            def on_tester_clicked():
+                if not user_input.strip():
+                    st.error("Please paste your code")
+                    return
+                st.session_state.tester_clicked = True
+                st.session_state.tester_input = user_input
+
+            user_input = st.text_area(
+                label='Paste your code:',
+                height=70,
+                placeholder="""Paste your code to write tests for."""
+            )
+
+            st.button('generate tests', on_click=on_tester_clicked)
+
+            if 'tester_clicked' in st.session_state and st.session_state.tester_clicked:
+                logger.info("Tester clicked, using stored input")
+                st.header('Results')
+                
+                sequence_file = BLUEPRINT_DIR / "tester.md"
+                logger.info(f"Using sequence file: {sequence_file}")
+                
+                placeholders = {"code": st.session_state.tester_input}
+                await self.run_sequence_and_display(
+                    runner=self.runner,
+                    sequence_file=sequence_file,
+                    models=self.models,
+                    placeholders=placeholders,
+                    spinner_text="Generating test cases...",
+                    clear_session_flag="tester_clicked"
+                )
+                st.success("Test cases generated successfully!")
+
+        except Exception as e:
+            logger.error(f"Error in Tester tab: {e}")
+            st.error("An error occurred in the Tester tab")
+
+    async def show_generator_tab(self) -> None:
+        """Display code generator tab interface."""
+        try:
+            st.header('Generate code template')
+            
+            def on_generator_clicked():
+                if not user_input1.strip():
+                    st.error("Please enter requirements")
+                    return
+                if not user_input2.strip():
+                    st.error("Please enter code examples")
+                    return
+                st.session_state.generator_clicked = True
+                st.session_state.generator_requirements = user_input1
+                st.session_state.generator_examples = user_input2
+
+            user_input1 = st.text_area(
+                label='Enter requirements:',
+                height=70,
+                placeholder="""Describe the code you want to generate.
+Include programming language, framework preferences.
+Specify functionality, inputs, outputs, and any special requirements."""
+            )
+            user_input2 = st.text_area(
+                label='Paste code examples:',
+                height=70,
+                placeholder="""Paste your existing code as an example."""
+            )
+
+            st.button('generate code', on_click=on_generator_clicked)
+
+            if 'generator_clicked' in st.session_state and st.session_state.generator_clicked:
+                logger.info("Generator clicked, using stored input")
+                st.header('Results')
+                
+                sequence_file = BLUEPRINT_DIR / "generator.md"
+                logger.info(f"Using sequence file: {sequence_file}")
+                
+                placeholders = {
+                    "requirements": st.session_state.generator_requirements,
+                    "examples": st.session_state.generator_examples
+                }
+                await self.run_sequence_and_display(
+                    runner=self.runner,
+                    sequence_file=sequence_file,
+                    models=self.models,
+                    placeholders=placeholders,
+                    spinner_text="Generating code template...",
+                    clear_session_flag="generator_clicked"
+                )
+                st.success("Code template generated successfully!")
+
+        except Exception as e:
+            logger.error(f"Error in Generator tab: {e}")
+            st.error("An error occurred in the Generator tab")
+
     async def show(self) -> None:
         """Display main Sequences interface with tabs."""
         try:
             st.title("run sequences")
 
-            tab1, tab2 = st.tabs(["AdWords", "Calendar"])
+            tab1, tab2, tab3, tab4, tab5 = st.tabs([
+                "AdWords", 
+                "Calendar", 
+                "Solver",
+                "Tester",
+                "Coder"
+            ])
+            
             with tab1:
                 await self.show_adwords_tab()  
             with tab2:
                 await self.show_calendar_tab()
+            with tab3:
+                await self.show_solver_tab()
+            with tab4:
+                await self.show_tester_tab()
+            with tab5:
+                await self.show_generator_tab()
 
         except Exception as e:
             logger.error(f"Error in main interface: {e}")
