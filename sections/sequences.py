@@ -169,9 +169,6 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
             st.header('Solve coding errors')
             
             def on_solver_clicked():
-                if not user_input.strip():
-                    st.error("Please enter a problem description")
-                    return
                 st.session_state.solver_clicked = True
                 st.session_state.solver_input = user_input
 
@@ -211,9 +208,6 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
             st.header('Generate tests')
             
             def on_tester_clicked():
-                if not user_input.strip():
-                    st.error("Please paste your code")
-                    return
                 st.session_state.tester_clicked = True
                 st.session_state.tester_input = user_input
 
@@ -253,12 +247,6 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
             st.header('Generate code template')
             
             def on_generator_clicked():
-                if not user_input1.strip():
-                    st.error("Please enter requirements")
-                    return
-                if not user_input2.strip():
-                    st.error("Please enter code examples")
-                    return
                 st.session_state.generator_clicked = True
                 st.session_state.generator_requirements = user_input1
                 st.session_state.generator_examples = user_input2
