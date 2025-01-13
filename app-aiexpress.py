@@ -4,7 +4,7 @@ import streamlit as st
 
 from typing import Dict, Callable
 
-from sections import vault, data, settings
+from sections import vault, data
 
 class VaultApp:
     """
@@ -14,7 +14,6 @@ class VaultApp:
         self.pages: Dict[str, Callable] = {
             "Bot": vault.Vault,
             "Data": data.DataLoader,
-            "Settings": settings.SettingsApp,
         }
         self.setup_logging()
 
