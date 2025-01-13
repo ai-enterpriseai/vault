@@ -4,7 +4,7 @@ import streamlit as st
 
 from pathlib import Path
 from typing import Optional, Literal, Union
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, SecretStr
 
 from pipeline.utils.logging import setup_logger
 
@@ -76,6 +76,41 @@ def replace_api_keys(config: dict) -> dict:
         config.generator.anthropic_api_key = st.secrets['ANTHROPIC_API_KEY']
 
     return config
+
+def replace_runner_settings(runner) -> None:
+    """
+    Configure SequenceRunner settings with API keys from Streamlit secrets,
+    but only if they're not already set or are empty.
+    
+    Args:
+        runner: SequenceRunner instance to configure
+    """
+    # Map settings names to their secret keys
+    settings_mapping = {
+        'openai_api_key': 'OPENAI_API_KEY',
+        'anthropic_api_key': 'ANTHROPIC_API_KEY',
+        'together_api_key': 'TOGETHER_API_KEY',
+        'hf_api_key': 'HF_API_KEY',
+        'cerebras_api_key': 'CEREBRAS_API_KEY',
+        'sambanova_api_key': 'SAMBANOVA_API_KEY'
+    }
+    
+    for setting_name, secret_key in settings_mapping.items():
+        current_value = getattr(runner.settings, setting_name, None)
+        
+        # Check if setting is None, empty, or not set
+        if (current_value is None or 
+            not current_value or 
+            current_value.get_secret_value() == ""):
+            
+            # Only try to set if the secret exists
+            if secret_key in st.secrets:
+                setattr(
+                    runner.settings,
+                    setting_name,
+                    SecretStr(st.secrets[secret_key])
+                )
+                logger.debug(f"Updated {setting_name} from secrets")
 
 class UIConfig(BaseModel):
     """Configuration for the Streamlit UI."""

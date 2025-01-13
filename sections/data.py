@@ -21,7 +21,7 @@ class DataLoader:
     async def load_vault(self) -> None:
         """Load and index documents from the VAULT."""
         try:
-            if st.button("Load VAULT"):
+            if st.button("load VAULT"):
                 with st.spinner("Loading and indexing the VAULT..."):
                     await self.docs_loader.delete_index()
                     st.success(f"Cleaned index, loading now...")
@@ -36,7 +36,7 @@ class DataLoader:
         """Load and index a file uploaded by the user."""
         try:
             uploaded_file = st.file_uploader("Choose a file to upload")
-            if st.button("Load File") and uploaded_file is not None:
+            if st.button("load file") and uploaded_file is not None:
                 with st.spinner("Loading and indexing file..."):
                     docs = await self.docs_loader.load_file(uploaded_file)
                     await self.index_docs(docs)
@@ -49,7 +49,7 @@ class DataLoader:
         """Load and index documents from a directory specified by the user."""
         try:
             directory = st.text_input("Enter directory path to load:")
-            if st.button("Load Directory") and directory:
+            if st.button("load directory") and directory:
                 with st.spinner("Loading and indexing directory..."):
                     docs = await self.docs_loader.load_directory(directory)
                     await self.index_docs(docs)
@@ -69,7 +69,7 @@ class DataLoader:
     async def show(self) -> None:
         """Show the data loading section in the Streamlit app."""
         try:
-            st.title("Load Data")
+            st.title("load data")
             await self.load_vault()
             await self.load_file() 
             await self.load_directory()

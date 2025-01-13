@@ -35,7 +35,7 @@ class Vault:
         try:
             context = await self.retriever.get_context(prompt)
             self.messages.append({"role": "user", "content": prompt})
-            self.messages.append({"role": "context", "content": context})  # TODO role user or content 
+            self.messages.append({"role": "user", "content": context})  # TODO role user or content 
             logger.info(f"Processed user input: {prompt[:100]}...")
         except Exception as e:
             logger.error(f"Error handling user input: {e}")
@@ -47,10 +47,9 @@ class Vault:
             for message in self.messages:
                 if message["role"] in ["system"]:
                     continue
-                if message["role"] in ["context"]:
-                    continue
                 if message["content"].startswith("<context>"): 
                     continue
+                    st.write(message["content"])
                 with st.chat_message(message["role"]):
                     st.write(message["content"])
         except Exception as e:
