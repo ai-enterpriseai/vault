@@ -25,12 +25,12 @@ base_eval:
       min_chunk_size: 128
 
     embedder:
-      embedder_type: "openai"
-      dense_model_name: "text-embedding-3-large" # all-mpnet-base-v2 for standard sentence transformers, text-embedding-3-small standard openai 
-      dense_model_dimension: 3072 # must correspond with indexer, 768 for all-mpnet-base-v2 standard sentence transformers, 1536 text-embedding-3-small standard openai
-      # embedder_type: "sentence_transformer"
-      # dense_model_name: "all-mpnet-base-v2" # all-mpnet-base-v2 for standard sentence transformers, standard openai 
-      # dense_model_dimension: 768 # must correspond with indexer, 768 for all-mpnet-base-v2 standard sentence transformers, 
+      # embedder_type: "openai"
+      # dense_model_name: "text-embedding-3-large" # all-mpnet-base-v2 for standard sentence transformers, text-embedding-3-small standard openai 
+      # dense_model_dimension: 3072 # must correspond with indexer, 768 for all-mpnet-base-v2 standard sentence transformers, 1536 text-embedding-3-small standard openai
+      embedder_type: "sentence_transformer"
+      dense_model_name: "all-mpnet-base-v2" # all-mpnet-base-v2 for standard sentence transformers, standard openai 
+      dense_model_dimension: 768 # must correspond with indexer, 768 for all-mpnet-base-v2 standard sentence transformers, 
 
     indexer: # qdrant client 
       use_local_db: false
@@ -38,7 +38,7 @@ base_eval:
       qdrant_api_key: "YOUR_API_KEY"
       collection_name: "YOUR_COLLECTION_NAME"
       db_path: "database"
-      dense_model_dimension: 3072 # must correspond with embedder 
+      dense_model_dimension: 768 # must correspond with embedder 
 
     retriever:
       top_k: 25
