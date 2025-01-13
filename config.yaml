@@ -1,0 +1,78 @@
+base_eval:
+  id: rag-eval.v0.1
+  name: base_eval
+  setup:
+    experiment:
+      tracking: true
+      save_path: "experiments/"
+      metadata_fields: ["timestamp", "dataset", "model_versions"]
+        
+    metrics:
+      factuality:
+        version: "v0.1"
+        name: "factuality" # corresponds to metrics/name.md
+        description: "Evaluates factual accuracy of responses"
+
+      relevance:
+        version: "v0.1"
+        name: "relevance"
+        description: "Evaluates response relevance to queries"
+
+  pipeline: 
+    processor:
+      chunk_size: 512
+      chunk_overlap: 128
+      min_chunk_size: 128
+
+    embedder:
+      embedder_type: "openai"
+      dense_model_name: "text-embedding-3-large" # all-mpnet-base-v2 for standard sentence transformers, text-embedding-3-small standard openai 
+      dense_model_dimension: 3072 # must correspond with indexer, 768 for all-mpnet-base-v2 standard sentence transformers, 1536 text-embedding-3-small standard openai
+      # embedder_type: "sentence_transformer"
+      # dense_model_name: "all-mpnet-base-v2" # all-mpnet-base-v2 for standard sentence transformers, standard openai 
+      # dense_model_dimension: 768 # must correspond with indexer, 768 for all-mpnet-base-v2 standard sentence transformers, 
+
+    indexer: # qdrant client 
+      use_local_db: false
+      url: "YOUR_URL"
+      qdrant_api_key: "YOUR_API_KEY"
+      collection_name: "YOUR_COLLECTION_NAME"
+      db_path: "database"
+      dense_model_dimension: 3072 # must correspond with embedder 
+
+    retriever:
+      top_k: 25
+      reranker:
+        # reranker_type: "reranker" # reranker for rerankers lib, or cohere 
+        # reranker_model_name: "cross-encoder/ms-marco-MiniLM-L-6-v2" # for rerankers lib, rerank-multilingual-v3.0 for cohere
+        # top_k: 5 # reranker top k
+        reranker_type: "cohere" # reranker for rerankers lib, or cohere 
+        reranker_model_name: "rerank-multilingual-v3.0" # for rerankers lib, rerank-multilingual-v3.0 for cohere
+        top_k: 5 # reranker top k 
+        api_key: "YOUR_API_KEY" # cohere key 
+      
+    manager: 
+      templates_dir: "./prompts"
+      version: "v0.1"
+      prompt: "system_workshop_assistant_de" # corresponds to prompts/name.md
+      description: "German language workshop assistant for AI implementation guidance"
+
+    generator:
+      primary_model: 
+        name: "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo"
+        max_tokens: 4096
+        temperature: 0.2
+        timeout: 30.0
+      fallback_model: 
+        name: "claude-3-5-sonnet-20241022"
+        max_tokens: 4096
+        temperature: 0.2
+        timeout: 30.0
+      together_api_key: "YOUR_API_KEY"
+      anthropic_api_key: "YOUR_API_KEY"
+      temperature: 0.7
+    
+  disclaimer: |
+    Evaluation relies on expert-reviewed ground truth data.
+    Metrics are based on LLM evaluation which may have inherent biases.
+    Results should be reviewed alongside human evaluation.
