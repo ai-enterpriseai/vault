@@ -75,6 +75,9 @@ def replace_api_keys(config: dict) -> dict:
     if not config.generator.anthropic_api_key or config.generator.anthropic_api_key == 'YOUR_API_KEY':
         config.generator.anthropic_api_key = st.secrets['ANTHROPIC_API_KEY']
 
+    if not config.retriever.reranker.api_key or config.retriever.reranker.api_key == 'YOUR_API_KEY':
+        config.retriever.reranker.api_key = st.secrets['COHERE_API_KEY']
+
     return config
 
 def replace_runner_settings(runner) -> None:
