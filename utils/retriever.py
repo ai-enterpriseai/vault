@@ -58,7 +58,7 @@ class ContextRetriever:
                 return query
 
             context = "\n\n---\n\n".join([doc.text for doc in results])
-            augmented_query = f"<context>\n\n{context}\n\n</context>\n\n{query}"
+            augmented_query = f"\<context>n\n{context}\n\n</context>\n\n{query}"
             
             logger.info("Context successfully retrieved and query augmented")
             return augmented_query

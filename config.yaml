@@ -70,7 +70,6 @@ base_eval:
         timeout: 30.0
       together_api_key: "YOUR_API_KEY"
       anthropic_api_key: "YOUR_API_KEY"
-      temperature: 0.7
     
   disclaimer: |
     Evaluation relies on expert-reviewed ground truth data.
