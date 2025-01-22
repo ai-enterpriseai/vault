@@ -47,7 +47,8 @@ class Vault:
             for message in self.messages:
                 if message["role"] in ["system"]:
                     continue
-                if message["content"].startswith("<context>"): 
+                # if message["content"].startswith("<context>"): 
+                if "<context>" in message["content"]: 
                     continue
                     # st.write(message["content"])
                 with st.chat_message(message["role"]):

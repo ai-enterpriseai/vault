@@ -38,7 +38,7 @@ class App:
         """Set the page configuration for the Streamlit app."""
         try:
             st.set_page_config(
-                page_title="cogit - a new way to interact with computers", 
+                page_title="cogit", 
                 page_icon="favicon.png", 
                 layout="wide"
             )
