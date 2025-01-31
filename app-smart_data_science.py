@@ -55,7 +55,7 @@ class App:
             logger.error(f"Unexpected error loading logo: {e}")
 
         try:
-            st.sidebar.title("vault app")
+            st.sidebar.title("cogit app")
             st.sidebar.text("explore knowledge base")
             st.sidebar.title("navigation")
             selection: str = st.sidebar.radio("go to", list(self.pages.keys()))
