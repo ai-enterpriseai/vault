@@ -291,12 +291,53 @@ Specify functionality, inputs, outputs, and any special requirements."""
             logger.error(f"Error in Generator tab: {e}")
             st.error("An error occurred in the Generator tab")
 
+    async def show_contract_check_tab(self) -> None:
+        """Display employment contract analysis tab interface."""
+        try:
+            st.header('Analyze Employment Contract')
+            
+            def on_contract_check_clicked():
+                st.session_state.contract_check_clicked = True
+                st.session_state.contract_check_input = user_input
+
+            user_input = st.text_area(
+                label='Paste contract text:',
+                height=70,
+                placeholder="""Paste employment contract text to analyze.
+Include clauses about compensation, termination, non-competes, 
+intellectual property, benefits, and other key sections."""
+            )
+
+            st.button('analyze contract', on_click=on_contract_check_clicked)
+
+            if 'contract_check_clicked' in st.session_state and st.session_state.contract_check_clicked:
+                logger.info("Contract check clicked, using stored input")
+                st.header('Analysis Results')
+                
+                sequence_file = BLUEPRINT_DIR / "contractcheck.md"
+                logger.info(f"Using sequence file: {sequence_file}")
+                
+                placeholders = {"contract_text": st.session_state.contract_check_input}
+                await self.run_sequence_and_display(
+                    runner=self.runner,
+                    sequence_file=sequence_file,
+                    models=self.models,
+                    placeholders=placeholders,
+                    spinner_text="Analyzing contract clauses...",
+                    clear_session_flag="contract_check_clicked"
+                )
+
+        except Exception as e:
+            logger.error(f"Error in Contract Check tab: {e}")
+            st.error("An error occurred during contract analysis")
+
     async def show(self) -> None:
         """Display main Sequences interface with tabs."""
         try:
             st.title("run sequences")
 
-            tab1, tab2, tab3, tab4, tab5 = st.tabs([
+            tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+                "Contract Check",
                 "Solver",
                 "Tester",
                 "Coder",
@@ -305,16 +346,18 @@ Specify functionality, inputs, outputs, and any special requirements."""
             ])
             
             with tab1:
-                await self.show_solver_tab()
+                await self.show_contract_check_tab()
             with tab2:
-                await self.show_tester_tab()
+                await self.show_solver_tab()
             with tab3:
-                await self.show_generator_tab()
+                await self.show_tester_tab()
             with tab4:
-                await self.show_adwords_tab()
+                await self.show_generator_tab()
             with tab5:
+                await self.show_adwords_tab()
+            with tab6:
                 await self.show_calendar_tab()
-
+                
         except Exception as e:
             logger.error(f"Error in main interface: {e}")
             st.error("An error occurred. Please try again.")
