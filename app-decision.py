@@ -7,7 +7,7 @@ from pipeline.utils.configs import (
     PipelineConfig
 )
 
-from sections import vault, data 
+from sections import vault, sequences, data 
 
 logger = setup_logger(__name__)
 
@@ -29,6 +29,7 @@ class App:
         self.config = PipelineConfig(**config["pipeline"])
         self.pages: Dict[str, Callable] = {
             "assistant": vault.Vault,
+            "sequencer": sequences.Sequences,
             "data": data.DataLoader,
         }
         logger.info("App initialized successfully")
@@ -37,7 +38,7 @@ class App:
         """Set the page configuration for the Streamlit app."""
         try:
             st.set_page_config(
-                page_title="decisionai - llm for business", 
+                page_title="decision.ai - llm for business", 
                 page_icon="favicon.png", 
                 layout="wide"
             )
