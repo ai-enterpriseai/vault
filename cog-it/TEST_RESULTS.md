@@ -4,6 +4,8 @@
 **Test Duration:** ~5 minutes  
 **Purpose:** Verify foundation components for VAULT_APP v2.0 refactor
 
+**Note:** The implementation is in `cog-it/` directory (refactor branch), while documentation is in `cogit/` (assessment folder).
+
 ---
 
 ## Backend Foundation Tests ✅
