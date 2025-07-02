@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-07-02T20:57:30.186Z",
+  "environment": {},
+  "failures": [
+    {
+      "component": "dev-server",
+      "error": "Command failed: curl -f -s http://localhost:5173",
+      "solution": "Start development server with: npm run dev"
+    }
+  ],
+  "status": "FAILED"
+}
