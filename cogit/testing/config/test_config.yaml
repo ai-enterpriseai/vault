@@ -1,0 +1,88 @@
+# VAULT_APP v2.0 Authentic Testing Configuration
+# Real environment settings for integration testing with live dependencies
+
+# Backend Configuration
+backend_url: "http://localhost:8000"  # Change to your FastAPI backend URL
+backend_timeout: 30.0
+
+# Qdrant Vector Database Configuration
+qdrant_url: "http://localhost:6333"  # Change to your Qdrant instance
+qdrant_api_key: "${QDRANT_API_KEY}"  # Will be overridden by environment variable
+qdrant_collection_name: "vault_documents"
+qdrant_timeout: 30.0
+
+# AI Model API Keys (Override with environment variables)
+openai_api_key: "${OPENAI_API_KEY}"
+anthropic_api_key: "${ANTHROPIC_API_KEY}"
+together_api_key: "${TOGETHER_API_KEY}"
+cohere_api_key: "${COHERE_API_KEY}"
+
+# Test Data Configuration
+test_data_path: "./data"
+sample_documents:
+  - "documents/test_document_1.pdf"
+  - "documents/test_document_2.txt"
+  - "documents/test_document_3.md"
+
+# Performance Test Configuration
+performance_tests:
+  database:
+    vector_size: 768
+    num_vectors: 1000
+    batch_size: 500
+    concurrent_requests: 25
+    max_search_time_ms: 100
+    min_insert_rate: 100  # vectors per second
+  
+  api:
+    health_check_timeout_ms: 200
+    concurrent_requests: 50
+    min_requests_per_second: 20
+    max_response_time_ms: 500
+  
+  chat:
+    websocket_timeout: 10.0
+    message_batch_size: 10
+    concurrent_connections: 25
+    min_success_rate: 0.9
+  
+  load_testing:
+    duration_seconds: 60
+    ramp_up_seconds: 10
+    max_concurrent_users: 100
+
+# Test Environment Configuration
+environment:
+  name: "integration_testing"
+  timeout_multiplier: 1.0  # Increase for slower environments
+  retry_attempts: 3
+  retry_delay_seconds: 2.0
+
+# Validation Thresholds
+validation_thresholds:
+  success_rate_minimum: 0.95
+  performance_degradation_max: 0.2  # 20% slower than baseline
+  memory_leak_threshold_mb: 100
+  error_rate_maximum: 0.01  # 1% error rate
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file_output: true
+  console_output: true
+  structured_logging: true
+
+# Security Configuration
+security:
+  validate_ssl: true
+  timeout_seconds: 30
+  max_file_size_mb: 100
+  allowed_file_types: [".pdf", ".txt", ".md", ".docx", ".doc"]
+
+# Reporting Configuration
+reporting:
+  output_format: "json"  # json, html, both
+  include_performance_graphs: true
+  include_error_details: true
+  save_request_logs: true
+  compress_large_reports: true
