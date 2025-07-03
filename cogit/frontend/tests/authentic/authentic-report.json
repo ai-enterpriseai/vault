@@ -1,0 +1,99 @@
+{
+  "timestamp": "2025-07-03T11:06:39.949Z",
+  "tests": [
+    {
+      "name": "server-connection",
+      "status": "passed",
+      "data": {
+        "responseTime": 10,
+        "status": "serving-react-app"
+      },
+      "timestamp": "2025-07-03T11:06:39.960Z"
+    },
+    {
+      "name": "application-structure",
+      "status": "passed",
+      "data": {
+        "totalTests": 5,
+        "passed": 5,
+        "passRate": "100.0%",
+        "details": [
+          {
+            "name": "react-root-div",
+            "passed": true
+          },
+          {
+            "name": "vite-entry-point",
+            "passed": true
+          },
+          {
+            "name": "html-document-structure",
+            "passed": true
+          },
+          {
+            "name": "viewport-meta",
+            "passed": true
+          },
+          {
+            "name": "module-support",
+            "passed": true
+          }
+        ]
+      },
+      "timestamp": "2025-07-03T11:06:39.969Z"
+    },
+    {
+      "name": "performance-testing",
+      "status": "passed",
+      "data": {
+        "cold-start": {
+          "responseTime": 8,
+          "rating": "excellent",
+          "description": "Initial load performance"
+        },
+        "warm-load": {
+          "responseTime": 7,
+          "rating": "excellent",
+          "description": "Subsequent load performance"
+        },
+        "response-time": {
+          "responseTime": 8,
+          "rating": "excellent",
+          "description": "Server response time"
+        }
+      },
+      "timestamp": "2025-07-03T11:06:39.992Z"
+    },
+    {
+      "name": "build-capabilities",
+      "status": "failed",
+      "error": "Expected double-quoted property name in JSON at position 187 (line 9 column 5)",
+      "timestamp": "2025-07-03T11:06:41.375Z"
+    }
+  ],
+  "performance": {
+    "cold-start": {
+      "responseTime": 8,
+      "rating": "excellent",
+      "description": "Initial load performance"
+    },
+    "warm-load": {
+      "responseTime": 7,
+      "rating": "excellent",
+      "description": "Subsequent load performance"
+    },
+    "response-time": {
+      "responseTime": 8,
+      "rating": "excellent",
+      "description": "Server response time"
+    }
+  },
+  "summary": {
+    "totalTests": 4,
+    "passed": 3,
+    "failed": 1,
+    "passRate": "75.0%",
+    "status": "SOME_FAILED",
+    "environment": "production-like"
+  }
+}
